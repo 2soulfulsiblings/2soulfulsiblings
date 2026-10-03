@@ -16,6 +16,16 @@ export const THEMES = [
   { id: 'cozy',         label: 'Cozy & Cottagecore',     icon: '🍂' },
 ]
 
+// Suggested palette/mood per theme, used to brief out Canva designs
+export const THEME_PALETTES = {
+  'van-life':    'Warm retro — burnt orange, mustard yellow, faded denim blue, cream',
+  'sunsets':     'Golden hour gradient — coral pink, tangerine, deep purple, gold',
+  'new-orleans': 'Moody jazz-club jewel tones — teal, plum, brass gold, wrought-iron black',
+  'adventure':   'Outdoorsy and earthy — forest green, clay brown, sky blue, cream',
+  'coastal':     'Faded vintage travel-poster — seafoam, navy, driftwood tan, cream',
+  'cozy':        'Soft cottagecore pastels — dusty rose, sage green, warm cream, honey',
+}
+
 export const CATS = ['Stevie', 'Bridget', 'Jewels', 'All Three']
 
 export const STATUS_CONFIG = {
