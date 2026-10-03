@@ -1,5 +1,80 @@
 import { useState } from 'react'
-import { CATEGORIES, THEMES, CATS, STATUS_CONFIG } from '../data/products.js'
+import { CATEGORIES, THEMES, CATS, STATUS_CONFIG, THEME_PALETTES } from '../data/products.js'
+
+function buildDesignBrief(product) {
+  const cat = CATEGORIES.find(c => c.id === product.category)
+  const theme = THEMES.find(t => t.id === product.theme)
+  const lines = [
+    `CANVA DESIGN BRIEF — Traveling Maine Coons`,
+    ``,
+    `Product: ${product.name}`,
+    `Product type: ${cat?.label ?? product.category}`,
+    `Featuring: ${product.cat}`,
+    `Theme: ${theme?.label ?? product.theme}`,
+    product.suggestedPrice ? `Target price: $${product.suggestedPrice}` : null,
+    ``,
+    `Design description:`,
+    product.description || '(none yet — add one on the product first)',
+    ``,
+    `Suggested palette: ${THEME_PALETTES[product.theme] ?? '(pick a palette that fits the theme)'}`,
+    product.notes ? `\nAdditional notes: ${product.notes}` : null,
+    ``,
+    `Deliverable: Etsy listing primary image, 2000x2000px square, lifestyle-mockup style showing the design on the product. Warm, adventurous, cozy Traveling Maine Coons brand feel.`,
+  ].filter(Boolean)
+  return lines.join('\n')
+}
+
+function DesignBriefModal({ product, onClose }) {
+  const [copied, setCopied] = useState(false)
+  const brief = buildDesignBrief(product)
+
+  const copy = async () => {
+    try {
+      await navigator.clipboard.writeText(brief)
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2000)
+    } catch {
+      // Clipboard API unavailable — the text is still selectable from the box below.
+    }
+  }
+
+  return (
+    <div className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center p-4">
+      <div className="bg-white rounded-2xl w-full max-w-lg shadow-xl max-h-[90vh] overflow-y-auto">
+        <div className="flex items-center justify-between px-6 pt-5 pb-4 border-b border-gray-100">
+          <h2 className="text-lg font-bold text-tmc-navy">🎨 Design Brief</h2>
+          <button onClick={onClose} className="text-gray-400 hover:text-gray-600 text-xl leading-none">×</button>
+        </div>
+        <div className="px-6 py-5 space-y-4">
+          <p className="text-sm text-gray-500">
+            Copy this and paste it to Claude to generate the real design in Canva.
+          </p>
+          <textarea
+            readOnly
+            value={brief}
+            rows={14}
+            className="w-full border border-gray-200 rounded-lg px-3 py-2 text-xs font-mono text-gray-700 bg-gray-50 resize-none focus:outline-none"
+            onFocus={e => e.target.select()}
+          />
+        </div>
+        <div className="flex justify-end gap-3 px-6 py-4 border-t border-gray-100">
+          <button
+            onClick={onClose}
+            className="px-4 py-2 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-100 transition"
+          >
+            Close
+          </button>
+          <button
+            onClick={copy}
+            className="px-5 py-2 rounded-lg text-sm font-medium bg-tmc-teal text-white hover:bg-tmc-teal-dark transition"
+          >
+            {copied ? '✓ Copied!' : 'Copy brief'}
+          </button>
+        </div>
+      </div>
+    </div>
+  )
+}
 
 const EMPTY_PRODUCT = {
   name: '', category: 'mugs', cat: 'All Three', theme: 'van-life',
@@ -154,6 +229,7 @@ export default function ProductManager({ products, setProducts, onGenerateListin
   const [themeFilter, setTh]  = useState('')
   const [modal, setModal]     = useState(null)
   const [editing, setEditing] = useState(null)
+  const [briefFor, setBriefFor] = useState(null)
 
   const filtered = products.filter(p => {
     const matchSearch = !search || p.name.toLowerCase().includes(search.toLowerCase())
@@ -190,6 +266,9 @@ export default function ProductManager({ products, setProducts, onGenerateListin
     <div className="p-6 max-w-5xl mx-auto">
       {modal === 'form' && editing && (
         <Modal product={editing} onSave={handleSave} onClose={() => setModal(null)} />
+      )}
+      {briefFor && (
+        <DesignBriefModal product={briefFor} onClose={() => setBriefFor(null)} />
       )}
 
       <div className="flex items-center justify-between mb-6">
@@ -294,12 +373,20 @@ export default function ProductManager({ products, setProducts, onGenerateListin
                       Delete
                     </button>
                   </div>
-                  <button
-                    onClick={() => onGenerateListing(p)}
-                    className="text-xs font-medium text-tmc-amber hover:text-tmc-teal transition px-2 py-1 rounded hover:bg-tmc-amber-light"
-                  >
-                    ✍️ Generate listing
-                  </button>
+                  <div className="flex gap-1">
+                    <button
+                      onClick={() => setBriefFor(p)}
+                      className="text-xs font-medium text-tmc-teal-dark hover:text-tmc-teal transition px-2 py-1 rounded hover:bg-tmc-teal-light"
+                    >
+                      🎨 Design brief
+                    </button>
+                    <button
+                      onClick={() => onGenerateListing(p)}
+                      className="text-xs font-medium text-tmc-amber hover:text-tmc-teal transition px-2 py-1 rounded hover:bg-tmc-amber-light"
+                    >
+                      ✍️ Generate listing
+                    </button>
+                  </div>
                 </div>
 
                 <div className="flex gap-1 flex-wrap">
