@@ -1,0 +1,133 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here.
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    /* Chasing the Sunlight Design System */
+    --background: 0 0% 100%;
+    --foreground: 210 66% 17%;
+
+    /* Deep navy - primary brand color */
+    --primary: 210 66% 17%;
+    --primary-foreground: 0 0% 100%;
+
+    /* Sunset orange - accent and CTAs */
+    --secondary: 10 100% 67%;
+    --secondary-foreground: 0 0% 100%;
+
+    /* Soft gold - highlights and hover */
+    --accent: 36 87% 71%;
+    --accent-foreground: 210 66% 17%;
+
+    /* Warm gray - backgrounds and uncompleted states */
+    --muted: 30 18% 95%;
+    --muted-foreground: 210 66% 17%;
+
+    /* Cards and surfaces */
+    --card: 0 0% 100%;
+    --card-foreground: 210 66% 17%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 210 66% 17%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 30 18% 88%;
+    --input: 30 18% 88%;
+    --ring: 10 100% 67%;
+
+    --radius: 0.75rem;
+
+    /* Custom gradient for hero overlays */
+    --gradient-hero: linear-gradient(to bottom, hsl(210 66% 17% / 0.6), hsl(210 66% 17% / 0.8));
+    --gradient-sunset: linear-gradient(135deg, hsl(10 100% 67%), hsl(36 87% 71%));
+
+    /* Shadows with warm tones */
+    --shadow-soft: 0 4px 20px hsl(10 100% 67% / 0.1);
+    --shadow-medium: 0 8px 30px hsl(10 100% 67% / 0.15);
+
+    /* Transitions */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .dark {
+    --background: 210 66% 17%;
+    --foreground: 0 0% 100%;
+
+    --primary: 0 0% 100%;
+    --primary-foreground: 210 66% 17%;
+
+    --secondary: 10 100% 67%;
+    --secondary-foreground: 0 0% 100%;
+
+    --accent: 36 87% 71%;
+    --accent-foreground: 210 66% 17%;
+
+    --muted: 210 66% 25%;
+    --muted-foreground: 30 18% 95%;
+
+    --card: 210 66% 20%;
+    --card-foreground: 0 0% 100%;
+
+    --popover: 210 66% 20%;
+    --popover-foreground: 0 0% 100%;
+
+    --destructive: 0 62.8% 50%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 210 66% 25%;
+    --input: 210 66% 25%;
+    --ring: 10 100% 67%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Merriweather', Georgia, serif;
+    font-weight: 700;
+  }
+}
+
+@layer utilities {
+  .animate-fade-in {
+    animation: fade-in 0.6s ease-out forwards;
+  }
+
+  .animate-fade-in-delay {
+    animation: fade-in 0.6s ease-out 0.2s forwards;
+    opacity: 0;
+  }
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .text-gradient-sunset {
+    background: linear-gradient(135deg, hsl(10 100% 67%), hsl(36 87% 71%));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}
