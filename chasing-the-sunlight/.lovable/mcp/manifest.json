@@ -1,0 +1,87 @@
+{
+  "version": 1,
+  "sdk_version": "2.0.4",
+  "path": "/functions/v1/mcp",
+  "auth": {
+    "type": "oauth",
+    "issuer": "https://jetjimvctewejkdcbncb.supabase.co/auth/v1",
+    "accepted_audiences": [
+      "authenticated"
+    ]
+  },
+  "mcp": {
+    "server": {
+      "name": "chasing-the-sunlight-mcp",
+      "version": "0.1.0",
+      "title": "Chasing the Sunlight"
+    },
+    "tools": [
+      {
+        "name": "list_cat_posts",
+        "title": "List cat blog posts",
+        "description": "List published blog posts from Stevie Bridget & Jewels — the two Maine Coon sisters chronicling a 50-state sunset road trip. Returns title, slug, location, post_date, and tags for each post.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "limit": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 50,
+              "description": "Max posts to return (default 20)."
+            }
+          },
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "get_cat_post",
+        "title": "Get a cat blog post",
+        "description": "Fetch a single published blog post by slug, including the full markdown body written in Stevie Bridget & Jewels' voices.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "slug": {
+              "type": "string",
+              "minLength": 1,
+              "description": "The post slug, e.g. 'sunset-in-bar-harbor'."
+            }
+          },
+          "required": [
+            "slug"
+          ],
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "project_info",
+        "title": "About this project",
+        "description": "Returns a short description of the Chasing the Sunlight project: a tribute to Steven Reed and a 50-state road trip capturing sunsets, chronicled by Maine Coon sisters Stevie Bridget & Jewels.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
+          "type": "object",
+          "properties": {}
+        },
+        "outputSchema": null
+      }
+    ]
+  }
+}
