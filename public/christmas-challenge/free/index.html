@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Free Christmas Listing Launch Kit</title><link rel="stylesheet" href="../style.css"></head><body>
+<nav class="noprint"><div class="wrap"><b>🎄 Christmas Listing Launch Kit</b><div><a href="../">Challenge home</a><a href="../products/">Products</a></div></div></nav>
+<header class="hero" style="padding:40px 0"><div class="wrap"><span class="tag">Your free download</span><h1 id="hi">Your Christmas Listing Launch Kit</h1>
+<p class="sub">Print it or save it as a PDF, then start Day 1. Peace Love &amp; Plan × 2SoulfulSiblings.</p>
+<button class="btn noprint" onclick="window.print()">🖨 Print or save as PDF</button></div></header>
+
+<section class="pg"><div class="wrap"><h2>1. Your 25 day tracker</h2><p class="lead">Tick each day when the listing is live.</p><div class="days" id="track"></div></div></section>
+
+<section class="alt pg"><div class="wrap"><h2>2. Product idea list</h2><p class="lead">Circle your favorites, then follow the order in the tracker.</p>
+<div class="grid"><div class="card"><h3>Planners</h3><p>To-do, budget, meal plan, gift list, self care, New Year reset.</p></div><div class="card"><h3>Printables</h3><p>Gift tags, advent cards, signs, coloring pages, recipe cards.</p></div><div class="card"><h3>Templates</h3><p>Canva social kits, thank you cards, Santa letters.</p></div><div class="card"><h3>Bundles</h3><p>Group 5 to 10 related items for a higher price.</p></div></div></div></section>
+
+<section class="pg"><div class="wrap"><h2>3. Starter AI prompts</h2><p class="lead">Copy, paste, replace the [brackets], then rewrite in your own voice.</p>
+<div class="card"><ol style="padding-left:20px;line-height:1.9" id="prompts"></ol></div></div></section>
+
+<section class="alt pg"><div class="wrap"><h2>4. Listing quality checklist</h2>
+<div class="card"><ul class="check"><li>Title leads with the main search phrase</li><li>All 13 tags used, mix of short and long phrases</li><li>First photo shows the product clearly, with text readable at thumbnail size</li><li>Description says exactly what files they receive, format and size</li><li>Digital download notes: no physical item, how to download</li><li>Price checked against 5 similar listings</li><li>You read the AI copy out loud and fixed anything stiff</li><li>Only your own artwork, or assets with a license that allows resale</li></ul></div>
+<p class="note">Always read Etsy's current digital product and AI disclosure rules before publishing. They change.</p></div></section>
+
+<section class="pg"><div class="wrap"><h2>5. Holiday posting calendar</h2>
+<div class="grid"><div class="card"><h3>Week of Nov 9</h3><p>List days 1 to 7. Post a Pin per listing.</p></div><div class="card"><h3>Week of Nov 16</h3><p>List days 8 to 14. Start one email to your list.</p></div><div class="card"><h3>Week of Nov 23</h3><p>List days 15 to 21. Black Friday and Cyber Monday offer.</p></div><div class="card"><h3>Week of Nov 30</h3><p>List days 22 to 25. Bundle everything. Last minute gift push.</p></div></div>
+<p class="note">Dates assume you start this week. Slide the whole plan forward if you start later.</p></div></section>
+
+<section class="cta noprint"><div class="wrap"><h2>Want the prompts, templates and done with you vault?</h2><p class="lead">The Product Suite takes you from free kit to a full holiday catalog.</p><a class="btn" href="../products/">See the Product Suite</a></div></section>
+<footer>© Peace Love &amp; Plan × 2SoulfulSiblings · For personal use. Please do not resell or redistribute.</footer>
+<script>
+var T=["Gift tag set","Christmas to-do planner","Holiday budget tracker","Gift list tracker","Advent activity cards","Card address log","Meal plan page","Recipe cards","Elf notes","Santa letters","Photo prop signs","Christmas Eve box labels","Wrapping paper patterns","Kids chore chart","Teacher gift tags","Stocking stuffer list","Party planner","Coloring pages","Countdown poster","Self care planner","Gratitude journal","Canva social kit","Thank you cards","New Year reset","Full bundle"];
+var P=["Give me 15 Etsy search phrases a shopper might type for a printable [product]. Group them by buyer intent.","Write an Etsy title under 140 characters for a [product] that leads with [main phrase]. Give me 3 options.","List 13 Etsy tags, each 20 characters or less, for a [product] aimed at [buyer].","Write a warm, friendly listing description for a [product]. Include what is in the download, file formats, sizes, and how to use it. Keep it under 250 words and sound like a real person.","Give me 5 mockup photo ideas for a [product] that show it in a cozy Christmas setting.","Write a Canva design brief for a [product]: layout, fonts, a Christmas color palette, and the exact text on each page.","Rewrite this draft so it sounds like me: [paste draft]. I am warm, creative and conversational. No corporate words.","Suggest 3 bundle ideas that combine [product] with related items, and a price range for each.","Write 5 Pinterest pin titles and descriptions for my [product] listing.","Write a short email announcing my new [product] to my list. Friendly tone, one clear call to action."];
+var tr=document.getElementById("track");T.forEach(function(t,i){var d=document.createElement("label");d.className="day";d.style.display="block";d.style.cursor="pointer";var k="clc_day_"+i,on=false;try{on=localStorage.getItem(k)==="1"}catch(e){}d.innerHTML='<b>DAY '+(i+1)+'</b><input type="checkbox" '+(on?"checked":"")+'> '+t;d.querySelector("input").onchange=function(e){try{localStorage.setItem(k,e.target.checked?"1":"0")}catch(x){}};tr.appendChild(d)});
+var pl=document.getElementById("prompts");P.forEach(function(p){var li=document.createElement("li");li.textContent=p;pl.appendChild(li)});
+try{var s=JSON.parse(localStorage.getItem("clc_signup")||"null");if(s&&s.n)document.getElementById("hi").textContent=s.n+", your Christmas Listing Launch Kit"}catch(e){}
+</script></body></html>
